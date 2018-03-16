@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>User details</h1>
+    <ul>
+        <li><%=user.firstname %></li>
+        <li><%=user.lastname %></li>
+        
+    </ul>
+    <h3><a href="/user/edit/<%= user._id%>">Edit </a></h3>
+
+   <form action="/user/delete/<%= user._id%>" method="post">
+
+    <input type="submit" value="Delete">
+   </form>
+    <!-- <h3><a href="/user/delete/<%=user._id%>">Delete</a></h3> -->
+</body>
+</html>
