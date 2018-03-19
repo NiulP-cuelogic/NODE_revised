@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
+// mongoose.set('debug',true);
 
 var userController = {};
 
@@ -71,12 +72,17 @@ userController.login = function(req,res){
     .then(user=>{
         // user = req.body;
         if(user.length<1){
-            console.log();
+            // console.log();
             console.log("user does not exist..")
         }
         else{
-            // console.log(user);
-            res.redirect('/user/show/'+user_id);
+            // console.log(user);   
+            // res.redirect('/user/show/'+user_id);
+            user = user[0];
+            console.log('user exists..');
+            console.log(user);
+            res.render('../views/users/show',{user:user});
+            
         }
     })
 }
