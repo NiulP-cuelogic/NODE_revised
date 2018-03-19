@@ -81,8 +81,52 @@ userController.login = function(req,res){
             user = user[0];
             console.log('user exists..');
             console.log(user);
-            res.render('../views/users/show',{user:user});
+            if(user.email === 'admin@gmail.com' && user.password ==="admin"){
+                // res.status(200).json({message:"Welcome admin.."});
+                res.render('../views/admin/admin');
+            }
+            else{
+                 res.render('../views/users/show',{user:user});
+            }
+           
             
+        }
+    })
+}
+
+userController.list = function(req,res){
+    User.find()
+    .select('email firstname')
+    .exec()
+    .then(users=>{
+        console.log(users);
+        res.render('../views/admin/list',{users:users});
+    })
+    .catch(err=>{
+        console.log(err);
+    })
+}
+
+userController.admin_show = function(req,res){
+    User.findOne({_id:req.params.id})
+    .exec((err,user)=>{
+        if(err){
+            console.log("some error occurred..");
+        }
+        else{
+             res.render('../views/admin/user_show',{user:user});
+        }
+    })
+    
+}
+
+userController.admin_delete = function(req,res){
+    User.remove({_id:req.params.id},function(err){
+        if(err){
+            console.log("error deleting the user...");
+        }
+        else{
+            res.redirect('/user/login/users');
         }
     })
 }

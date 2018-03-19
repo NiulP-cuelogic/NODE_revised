@@ -35,4 +35,14 @@ router.post('/login',(req,res)=>{
     user.login(req,res);
 })
 
+router.get('/login/users',(req,res)=>{
+    user.list(req,res);
+})
+router.get('/admin/show/:id',(req,res)=>{
+    user.admin_show(req,res);
+})
+router.post('/admin/delete/:id',(req,res)=>{
+    user.admin_delete(req,res);
+})
+
 module.exports = router;
