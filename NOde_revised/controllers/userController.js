@@ -126,7 +126,7 @@ userController.admin_delete = function(req,res){
             console.log("error deleting the user...");
         }
         else{
-            res.redirect('/user/login/users');
+            res.redirect('/user/admin/users');
         }
     })
 }
