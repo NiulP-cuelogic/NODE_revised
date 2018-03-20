@@ -41,7 +41,7 @@ router.get('/admin/users',(req,res)=>{
 router.get('/admin/show/:id',(req,res)=>{
     user.admin_show(req,res);
 })
-router.post('/admin/delete/:id',(req,res)=>{
+router.get('/admin/delete/:id',(req,res)=>{
     user.admin_delete(req,res);
 })
 

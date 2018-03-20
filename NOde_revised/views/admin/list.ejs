@@ -12,19 +12,32 @@
             <thead>
                 <tr>
                     <th>User-email</th>
-                    <th>Username</th>
+                    <th>First-name</th>
+                    <th>Last-name</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
                 <% for(var i=0; i<users.length;i++) { %>
-                    <tr>
-                      <td><a href="/user/admin/show/<%= users[i]._id%>"><%= users[i].email%></a></td>
+                    <tr> 
+                      <td><%= users[i].email%></td>
                       <td><%= users[i].firstname%></td>
+                      <td><%= users[i].lastname%></td> 
+                      <td id="del-button"> <a href="/user/admin/delete/<%=users[i]._id%>"> Delete</td>
+                      <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td>
                     </tr>
                   <% } %>
             </tbody>
         </table>    
 
     </div>
+    <script>
+    function myFunction(){
+        console.log('called..');
+
+    }
+    
+    </script>
+    
 </body>
 </html>

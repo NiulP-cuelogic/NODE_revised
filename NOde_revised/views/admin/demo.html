@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+
+
+<body>
+
+<p contenteditable="false" id="d">This is a paragraph. It is editable. Try to change this text.</p>
+<button onclick = "myFun()">click</button>
+<script>
+function myFun(){
+var editable_elements = document.querySelectorAll("[contenteditable=false]");
+editable_elements[0].setAttribute("contenteditable", true);
+}
+</script>
+</body>
+</html>
