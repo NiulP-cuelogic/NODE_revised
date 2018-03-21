@@ -11,8 +11,9 @@ mongoose.Promise = global.Promise;
 var path  = require('path');
 var userRoutes = require("./routes/users");
 
-app.use(express.static(path.join(__dirname, './views/admin')))
+// app.use(express.static(path.join(__dirname, './views/admin')))
 // app.set('views',path.join(_dirname,'views'));
+app.use(express.static(__dirname+'/views'));
 app.set("view engine",'ejs');
 
 
