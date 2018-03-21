@@ -35,14 +35,24 @@ router.post('/login',(req,res)=>{
     user.login(req,res);
 })
 
-router.get('/admin/users',(req,res)=>{
-    user.list(req,res);
-})
+// router.get('/admin/users',(req,res)=>{
+//     user.list(req,res);
+// })
 router.get('/admin/show/:id',(req,res)=>{
     user.admin_show(req,res);
 })
 router.get('/admin/delete/:id',(req,res)=>{
     user.admin_delete(req,res);
+})
+router.get('/login/admin/edit/:id',(req,res)=>{
+    user.admin_edit(req,res);
+})
+
+router.get('/login/admin/users',(req,res)=>{
+    user.list(req,res);
+})
+router.post('/login/admin/update/:id',(req,res)=>{
+    user.admin_update(req,res);
 })
 
 module.exports = router;

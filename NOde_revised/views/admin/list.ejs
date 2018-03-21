@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <style>
+   
+    </style>
 </head>
 <body>
     <div class="container">
@@ -19,25 +23,27 @@
             </thead>
             <tbody>
                 <% for(var i=0; i<users.length;i++) { %>
-                    <tr> 
+                    <tr id="row_<%=i%>"> 
                       <td><%= users[i].email%></td>
                       <td><%= users[i].firstname%></td>
                       <td><%= users[i].lastname%></td> 
                       <td id="del-button"> <a href="/user/admin/delete/<%=users[i]._id%>"> Delete</td>
-                      <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td>
+                      <!-- <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td> -->
+                      <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
                     </tr>
                   <% } %>
             </tbody>
         </table>    
 
     </div>
-    <script>
-    function myFunction(){
-        console.log('called..');
-
-    }
-    
-    </script>
+   <script>
+   
+   $(document).ready(function(){
+       $('button').click(function(){
+           $('#row_<%=(i-1)%>').attr('contentEditable',false);
+       })
+   })
+   </script>
     
 </body>
 </html>

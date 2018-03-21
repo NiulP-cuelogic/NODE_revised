@@ -132,7 +132,9 @@ userController.login = function(req,res){
             }
             if(result){
                 if(req.body.email==='admin@gmail.com' && req.body.password ==='admin'){
-                    res.render('../views/admin/admin');
+                    // userController.list(req,res);
+                    res.redirect('/user/login/admin/users');
+                    res.render('../views/admin/list');
                 }
                 console.log(user);
                 user = user[0];
@@ -175,9 +177,36 @@ userController.admin_delete = function(req,res){
             console.log("error deleting the user...");
         }
         else{
-            res.redirect('/user/admin/users');
+            res.redirect('/user/login/admin/users');
         }
     })
 }
 
+
+userController.admin_edit = function(req,res){
+    User.findOne({_id:req.params.id})
+    .exec((err,users)=>{
+        if(err){
+            console.log("error ocurred..");
+        }
+        else{
+            res.render('../views/admin/edit',{user:users});
+        }
+    })
+    
+
+
+}
+
+userController.admin_update = function(req,res){
+    User.findByIdAndUpdate(req.params.id,{$set:{firstname:req.body.firstname,lastname:req.body.lastname}}
+        ,{new:true},function(err,user){
+                    if(err){
+                        console.log("error occurred while updating..");
+                        res.render("../views/users/edit",{user:req.body });
+                    }else{
+                        res.redirect("/user/login/admin/users");
+                    }
+        })
+}
 module.exports = userController;
