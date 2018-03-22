@@ -23,25 +23,95 @@
             <tbody>
                 <% for(var i=0; i<users.length;i++) { %>
                     <tr id="row_<%=i%>"> 
-                      <td><%= users[i].email%></td>
+                      <!-- <td><%= users[i].email%></td>
                       <td><%= users[i].firstname%></td>
-                      <td><%= users[i].lastname%></td> 
-                      <td id="del-button"> <a href="/user/admin/delete/<%=users[i]._id%>"> Delete</td>
+                      <td><%= users[i].lastname%></td>  -->
+                      <!-- <td id="delete-button"> <a href="/user/admin/delete/<%=users[i]._id%>"> Delete</td>
                       <!-- <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td> -->
-                      <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
+                      <!-- <td id="update-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td> -->
+                        <td class="id">  <%=users[i].email%></td>
+                        <td><input type="text" class="firstname" value=" <%=users[i].firstname%> "></td>
+                        <td><input type="text" class="lastname" value="  <%=users[i].lastname%>"></td>
+                        <td>
+                            <button class="update-button">UPDATE/PUT</button>
+                            <button class="delete-button">DELETE</button>
+                           
+                        </td>
+                        <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
                     </tr>
                   <% } %>
             </tbody>
         </table>    
 
+        <form action="/user/login/admin/search" method="POST">
+        
+        <input type="text" placeholder="search by name" name="input_name">
+        <input type="submit" value="SEARCH">
+        </form>
+        <!-- <button id="get-button">Get users</button> -->
+
+        <!-- <table>
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>First-name</th>
+                    <th>Last-name</th>
+                </tr>
+            </thead>
+            <tbody id="allusers">
+
+            </tbody>
+        </table> -->
     </div>
    <script>
    
-   $(document).ready(function(){
-       $('button').click(function(){
-           $('#row_<%=(i-1)%>').attr('contentEditable',false);
-       })
-   })
+//    $(document).ready(function(){
+//         $('#get-button').on('click',function(){
+//            $.ajax({
+//                url:'/user/login/admin/allusers',
+//                contentType:"application/json",
+//                success:function(response){
+//                   var tBody = $('#allusers');
+//                   tBody.html('');
+//                   response.user.forEach(function(user){
+//                       tBody.append(
+//                           '\
+//                         <tr>\
+//                             <td class="id">' + user.email + '</td>\
+//                             <td><input type="text" class="name" value="' + user.firstname + '"></td>\
+//                             <td><input type="text" class="name" value="' + user.lastname + '"></td>\
+//                             <td>\
+//                                 <button class="update-button">UPDATE/PUT</button>\
+//                                 <button class="delete-button">DELETE</button>\
+//                             </td>\
+//                         </tr>\
+//                     '
+//                       )
+//                   })
+//                }
+//            })
+//         })
+//    })
+
+    $(document).ready(function(){
+        $('table').on('click','.update-button',function(){
+            // console.log('called...');
+                var row = $(this).closest('tr');
+                var id = row.find('.id').text();
+                var newFirstName = row.find('.firstname').val();
+                var newLastName = row.find('.lastname').val();
+
+                $.ajax({
+                    url:'/user/login/admin/edit/',
+                    method:"PUT",
+                    contentType:"application/json",
+                    data:JSON.stringify({newFirstName:newFirstName},{newLastName:newLastName}),
+                    success:function(response){
+                        console.log(response);
+                    }
+                })
+        })
+    })
    </script>
     
 </body>

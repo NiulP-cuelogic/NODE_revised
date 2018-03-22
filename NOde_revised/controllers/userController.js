@@ -4,6 +4,7 @@ var Boom = require('boom');
 // mongoose.set('debug',true);
 var bcrypt = require('bcrypt');
 var userController = {};
+var ObjectId = require('mongodb').ObjectID;
 
 userController.create = function(req,res){ 
     res.render('../views/users/create');
@@ -208,5 +209,24 @@ userController.admin_update = function(req,res){
                         res.redirect("/user/login/admin/users");
                     }
         })
+}
+
+userController.search = function(req,res){
+    console.log('called..');
+    User.find({firstname:req.body.input_name})
+    .exec((err,users)=>{
+        if(err){
+            console.log(err);
+        }
+        else{
+            
+            var id = ObjectId(users[0]._id);
+            console.log(id);
+            user = users[0];
+            // console.log(user);
+            // user = users[0];
+            res.render('../views/admin/edit',{user:user});
+        }
+    })
 }
 module.exports = userController;
