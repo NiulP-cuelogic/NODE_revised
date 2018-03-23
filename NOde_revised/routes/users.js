@@ -41,7 +41,8 @@ router.post('/login',(req,res)=>{
 router.get('/admin/show/:id',(req,res)=>{
     user.admin_show(req,res);
 })
-router.get('/admin/delete/:id',(req,res)=>{
+router.get('/login/admin/delete/:id',(req,res)=>{
+    console.log('called...');
     user.admin_delete(req,res);
 })
 router.get( '/login/admin/edit/:id',(req,res)=>{

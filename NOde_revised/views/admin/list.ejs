@@ -5,21 +5,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    
-
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">    
+    <link rel="stylesheet" href="/css/admin_index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="container">
-        <table>
-            <thead>
+        <table class="users">
+           
                 <tr>
                     <th>User-email</th>
                     <th>First-name</th>
                     <th>Last-name</th>
                     <th>Actions</th>
                 </tr>
-            </thead>
+            
             <tbody>
                 <% for(var i=0; i<users.length;i++) { %>
                     <tr id="row_<%=i%>"> 
@@ -30,24 +31,22 @@
                       <!-- <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td> -->
                       <!-- <td id="update-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td> -->
                         <td class="id">  <%=users[i].email%></td>
-                        <td><input type="text" class="firstname" value=" <%=users[i].firstname%> "></td>
-                        <td><input type="text" class="lastname" value="  <%=users[i].lastname%>"></td>
-                        <td>
-                            <button class="update-button">UPDATE/PUT</button>
-                            <button class="delete-button">DELETE</button>
-                           
-                        </td>
-                        <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
+                        <td class="firstname"> <%=users[i].firstname%></td>
+                        <td class="lastname">  <%=users[i].lastname%></td>
+                        <td id="delete-button_<%=i%>"> <a href="/user/login/admin/delete/<%=users[i]._id%>">Delete </td>
+                        <td id="edit-button_<%=i%>">  <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
                     </tr>
                   <% } %>
             </tbody>
         </table>    
-
-        <form action="/user/login/admin/search" method="POST">
+        <div class="search">
+            <form action="/user/login/admin/search" method="POST">
         
         <input type="text" placeholder="search by name" name="input_name">
-        <input type="submit" value="SEARCH">
+        <input type="submit" value="SEARCH" id="search-btn">
         </form>
+        </div>
+        
         <!-- <button id="get-button">Get users</button> -->
 
         <!-- <table>
