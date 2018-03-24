@@ -24,17 +24,22 @@
             <tbody>
                 <% for(var i=0; i<users.length;i++) { %>
                     <tr id="row_<%=i%>"> 
-                      <!-- <td><%= users[i].email%></td>
-                      <td><%= users[i].firstname%></td>
-                      <td><%= users[i].lastname%></td>  -->
-                      <!-- <td id="delete-button"> <a href="/user/admin/delete/<%=users[i]._id%>"> Delete</td>
-                      <!-- <td class="edit-button" id="edit_"+<%=users[i]._id%>Edit</td> -->
-                      <!-- <td id="update-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td> -->
-                        <td class="id">  <%=users[i].email%></td>
-                        <td class="firstname"> <%=users[i].firstname%></td>
-                        <td class="lastname">  <%=users[i].lastname%></td>
+                    
+                        <td id="<%=i%>" contenteditable="true"> <p> <%=users[i].email%></p></td>
+                        <td class="firstname" contenteditable="true"> <%=users[i].firstname%></td>
+                        <td class="lastname" contenteditable="true">  <%=users[i].lastname%></td>
+                        
                         <td id="delete-button_<%=i%>"> <a href="/user/login/admin/delete/<%=users[i]._id%>">Delete </td>
-                        <td id="edit-button_<%=i%>">  <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit </td>
+                        
+                        <form >
+                        
+                         <td id="save-button_<%=i%>"> <button formaction="/user/login/admin/edit/<%=users[i]._id%>" >Edit</button></td>
+                        </form>
+                        <form>
+                                <td id="save-button_<%=i%>"> <button formaction="/user/login/admin/update/<%=users[i]._id%>" >Update</button></td>
+                        </form>
+                        
+                        
                     </tr>
                   <% } %>
             </tbody>
@@ -45,7 +50,7 @@
         <input type="text" placeholder="search by name" name="input_name">
         <input type="submit" value="SEARCH" id="search-btn">
         </form>
-        </div>
+        <!-- </div>
         
         <!-- <button id="get-button">Get users</button> -->
 
@@ -61,56 +66,16 @@
 
             </tbody>
         </table> -->
-    </div>
+    <!-- </div> -->
    <script>
-   
-//    $(document).ready(function(){
-//         $('#get-button').on('click',function(){
-//            $.ajax({
-//                url:'/user/login/admin/allusers',
-//                contentType:"application/json",
-//                success:function(response){
-//                   var tBody = $('#allusers');
-//                   tBody.html('');
-//                   response.user.forEach(function(user){
-//                       tBody.append(
-//                           '\
-//                         <tr>\
-//                             <td class="id">' + user.email + '</td>\
-//                             <td><input type="text" class="name" value="' + user.firstname + '"></td>\
-//                             <td><input type="text" class="name" value="' + user.lastname + '"></td>\
-//                             <td>\
-//                                 <button class="update-button">UPDATE/PUT</button>\
-//                                 <button class="delete-button">DELETE</button>\
-//                             </td>\
-//                         </tr>\
-//                     '
-//                       )
-//                   })
-//                }
-//            })
-//         })
-//    })
+        function myFunction(){
+            console.log('called..');
+            console.log("row_<%=i%>");
+            var a = "<%=i%>";console.log(a);
+            var m=document.getElementById("row_"+a);
+            console.log(m);
+        }
 
-    $(document).ready(function(){
-        $('table').on('click','.update-button',function(){
-            // console.log('called...');
-                var row = $(this).closest('tr');
-                var id = row.find('.id').text();
-                var newFirstName = row.find('.firstname').val();
-                var newLastName = row.find('.lastname').val();
-
-                $.ajax({
-                    url:'/user/login/admin/edit/',
-                    method:"PUT",
-                    contentType:"application/json",
-                    data:JSON.stringify({newFirstName:newFirstName},{newLastName:newLastName}),
-                    success:function(response){
-                        console.log(response);
-                    }
-                })
-        })
-    })
    </script>
     
 </body>

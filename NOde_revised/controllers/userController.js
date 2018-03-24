@@ -59,25 +59,27 @@ userController.show = function(req,res){
     })  
 }
 
-userController.edit = function(req,res){
-    User.findOne({_id:req.params.id})
-        .exec((err,user)=>{
-            if(err){
-                console.log("Error while editing...");
-            }else{
-                res.render("../views/users/edit",{user:user});
-            }
-    })
-}
+// userController.edit = function(req,res){
+//     User.findOne({_id:req.params.id})
+//         .exec((err,user)=>{
+//             if(err){
+//                 console.log("Error while editing...");
+//             }else{
+//                 // res.render("../views/users/edit",{user:user});
+            
+//             }
+//     })
+// }
 
 userController.update = function(req,res){
     User.findByIdAndUpdate(req.params.id,{$set:{firstname:req.body.firstname,lastname:req.body.lastname}}
     ,{new:true},function(err,user){
                 if(err){
                     console.log("error occurred while updating..");
-                    res.render("../views/users/edit",{user:req.body });
+                    // res.render("../views/users/edit",{user:req.body });
                 }else{
-                    res.redirect("/user/show/" + user._id);
+                    console.log('updated...');
+                    res.render("../views/users/show",{user:user});
                 }
     })
 }
@@ -191,7 +193,8 @@ userController.admin_edit = function(req,res){
             console.log("error ocurred..");
         }
         else{
-            res.render('../views/admin/edit',{user:users});
+            // res.render('../views/admin/edit',{user:users});
+            res.redirect('/user/login/admin/users');
         }
     })
     

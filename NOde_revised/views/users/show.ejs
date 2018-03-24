@@ -4,21 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>User Profile</title>
 </head>
 <body>
-    <h1>User details</h1>
-    <ul>
-        <li><%=user.firstname %></li>
-        <li><%=user.lastname %></li>
+    <div class="container">
+        <div class="heading">
+            <h1>User profile</h1>
+        </div>
+        <form action="/user/update/<%=user._id%>" method="post">
+            <div class="user_firstname">
+                <!-- <p><%=user.firstname%></p> -->
+                <input type="text" name="firstname" value="<%=user.firstname%>">
+            </div>
+            <div class="user_lastname">
+                <!-- <p><%=user.lastname%></p> -->
+                <input type="text" name="lastname" value="<%=user.lastname%>">
+            </div>
+            <input type="submit" value="Update">
+        </form>
+            
+        
+    </div>
+  
         
     </ul>
-    <h3><a href="/user/edit/<%= user._id%>">Edit </a></h3>
+    <!-- <h3><a href="/user/edit/<%= user._id%>" id="edit_link">Edit </a></h3> -->
 
    <form action="/user/delete/<%= user._id%>" method="post">
 
     <input type="submit" value="Delete">
    </form>
     <!-- <h3><a href="/user/delete/<%=user._id%>">Delete</a></h3> -->
+<script>
+
+// $(document).ready(function(){
+//     $('#edit_link').click(function(){
+//         console.log('called..');
+//         $('.user_firstname').attr('contentEditable','true');
+//         $('.user_lastname').attr('contentEditable','true');
+//     })
+// })
+
+</script>
+
 </body>
 </html>

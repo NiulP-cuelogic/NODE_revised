@@ -66,7 +66,7 @@ router.get('/login/admin/users',(req,res)=>{
     user.list(req,res);
    
 })
-router.post('/login/admin/update/:id',(req,res)=>{
+router.get('/login/admin/update/:id',(req,res)=>{
     user.admin_update(req,res);
 })
 
