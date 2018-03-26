@@ -3,6 +3,7 @@ var User = require('../models/user');
 var Boom = require('boom');
 // mongoose.set('debug',true);
 var bcrypt = require('bcrypt');
+var Joi = require('joi');
 var userController = {};
 var ObjectId = require('mongodb').ObjectID;
 
@@ -19,8 +20,9 @@ userController.save = function(req,res){
             // window.alert("User already exists .. please login..");
         }
         else{
-            
+
         }
+
         bcrypt.hash(req.body.password,10,(err,hash)=>{
             if(err){
                 console.log("some error occurred..");
@@ -36,6 +38,7 @@ userController.save = function(req,res){
                 .save()
                 .then(user=>{
                     console.log(user);
+                    console.log(req.body);
                     res.redirect('/user/show/'+ user._id);
                 })
                 .catch(err=>{

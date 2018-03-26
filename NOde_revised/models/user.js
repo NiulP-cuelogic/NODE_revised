@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 mongoose.set('debug',true);
+var Joi = require('joi');
 var Schema = mongoose.Schema;
 
 var userSchema = new Schema({
@@ -9,5 +10,16 @@ var userSchema = new Schema({
     lastname:{type:String , required:true},
     password:{type:String , required:true}
 });
+// var userSchema = Joi.object().keys({
+//     email:Joi.string().email(),
+//     firstname:Joi.string(),
+//     lastname:Joi.string(),
+//     password:Joi.string()
+// })
+// debugger;
+module.exports = mongoose.model("User",userSchema);   
 
-module.exports = mongoose.model("User",userSchema);
+
+
+
+

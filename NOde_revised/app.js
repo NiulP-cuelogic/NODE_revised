@@ -2,10 +2,11 @@ var express = require('express');
 var app = express();
 var mongoose = require('mongoose');
 var db = 'mongodb://localhost/user_db';
+var Joi = require('joi');
 var bodyParser = require('body-parser');
 
 app.use(bodyParser.urlencoded({extended:false}));
-
+app.use(bodyParser.json());
 mongoose.connect(db);
 mongoose.Promise = global.Promise;
 var path  = require('path');

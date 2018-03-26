@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var express = require('express');
 var User = require('../models/user');
 var router = express.Router();
-
+// var Validate = require('../validation/userValidation');
 var user = require('../controllers/userController');
 
 
@@ -12,7 +12,6 @@ router.get('/',(req,res)=>{
 });
 
 router.post('/save',(req,res)=>{
-    console.log('called');
     user.save(req,res);
 })
 
@@ -47,19 +46,7 @@ router.get('/login/admin/delete/:id',(req,res)=>{
 })
 router.get( '/login/admin/edit/:id',(req,res)=>{
     user.admin_edit(req,res);
-    // var id = req.params.id;
-    // var newFirstname = req.body.newFirstName;
-    // var newLastname = req.body.newLastName;
-    // var found  = false;
-    // User.find({},function(err,users){
-    //     users.forEach(function(user){
-    //         if(!found || user._id === id){
-    //             user.firstname = newFirstname;
-    //             user.lastname = newLastName;
-    //         }
-    //     })
-    // })
-    // res.send("updated user successfully...");
+    
 })
 
 router.get('/login/admin/users',(req,res)=>{
@@ -71,18 +58,7 @@ router.get('/login/admin/update/:id',(req,res)=>{
 })
 
 router.get('/login/admin/allusers',(req,res)=>{
-    // res.send({users:user});
-    // User.find()
-    // .select('email firstname lastname')
-    // .exec()
-    // .then(users=>{
-    //     res.send(users);
-    //     // res.render('../views/admin/list',{users:users});
-    // })
-    // .catch(err=>{
-    //     console.log(err);
-    // })
-    // var users = {};
+   
     User.find({},function(err,users){
        res.send({user:users});
     })
