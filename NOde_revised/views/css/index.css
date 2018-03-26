@@ -10,11 +10,12 @@ body {
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     color: lightgray;
+    font-size:15px;
     /* font-family: 'Lato', sans-serif; */
     /* font-size: 13px; */
   }
 
-.container{
+/* .container{
     width:50%;
     margin: 0 auto;
     overflow: hidden;
@@ -46,12 +47,13 @@ h1{
     margin-left: 30px;
 }
 label{
-    color: gray;
+    color: black;
     font-weight: lighter;
 }
 
 .firstname_div,  .email_div, .lastname_div, .password_div{
     line-height: 30px;
+    margin: 20px;
 }
 
 input[type="text"],input[type="email"] , input[type="password"]{
@@ -59,38 +61,105 @@ input[type="text"],input[type="email"] , input[type="password"]{
     border: 1px solid;
     border-color: #ccc;
     font-family:'Rammetto One', cursive;
-    /* width: 242px; */
+    width: 200px;
     height: 15px;
     padding: 10px;
     /* font-family:'Rammetto One', cursive; */
-    font-size: 15px;
-    color: black;
-    font-weight: bolder;
+    /* font-size: 15px; */
+    /* color: black; */
+    /* font-weight: bolder; */
     /* font-family: 'Lato', sans-serif; */
-    font-style: normal;
+    /* font-style: normal; */
     /* color: lightgray; */
 
-}
-.login_form{
+/* } */
+/* .login_form{
     padding-left: 20px;
-}
+    /* display: inline; */
+/* } */
 
-.button_align{
+/* .button_align{
     /* border-style:ridge; */
-    margin-left: 160px;
+    /* margin-left: 160px;
     margin-top: 15px;
+    width: 200px;
+    overflow:hidden;
+    text-align: center;
+
 }
 .btn{
     border-style: solid;
     background-color: white;
-    width: 65px;
+    width: 98px;
     height: 30px;
     background: #3897f0;
     border-radius: 20px;
+    margin-left: 0px;
     border-color: #3897f0;
+    /* margin: 0 auto; */
+    /* float: left; */
 
-}
-.btn:hover{
+/* } */
+/* .btn:hover{
     background-color: lightblue;
     border-color: lightblue;
+}  */ 
+
+.login-div{
+    /* display:inline; */
+    /* float: right; */
+}
+
+.signup-div{
+    width: 226px;
+    margin: 0 auto;
+    padding-top: 60px;
+    height: 480px;
+    /* border-style: solid; */
+}
+.signup_form{
+    margin: 0 auto;
+}
+.signup_class{
+    margin: 0 auto;
+    width:50%;
+}
+label{
+    font-size:22px;
+    color: black;
+    /* font-weight: bolder; */
+    /* line-height: 20px; */
+}
+
+input[type="text"],input[type="email"] , input[type="password"]{
+    border-radius: 3px;
+    border: 1px solid;
+    border-color: #ccc;
+    height:35px;
+    width: 200px;
+}
+
+.firstname_div,  .email_div, .lastname_div, .password_div{
+    line-height: 20px;
+    margin: 20px;
+}
+
+.button_align{
+    margin: 0 auto;
+    overflow: hidden;
+}
+.btn{
+    float: right;
+    height: 35px;
+    width: 100px;
+    color: white;
+    background: orange;
+    border-style: none;
+    border-radius: 30px;
+    font-size:15px;
+    text-align: center;
+    margin: 0 auto;
+}
+.btn:hover{
+    opacity: 0.5;
 }

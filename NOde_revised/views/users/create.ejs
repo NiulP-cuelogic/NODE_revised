@@ -8,45 +8,20 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
-
+    <script src="/scripts/validation.js"></script>
 
 </head>
 <body>
-    <div class="container"> 
-            <div class="signup-div">
-                <!-- <p>Sign up for free</p> -->
-                    <form action="/user/save" method="POST" class="signup_form">
-                        <div class="email_div">
-                             <label>Email</label><br>
-                             <input type="email" name="email" placeholder="email">
-                        </div>
-                        <div class="firstname_div">
-                             <label>First name</label><br>
-                             <input type="text" name="firstname" placeholder="first-name">
-                        </div>
-                        <div class="lastname_div">
-                            <label>Lastname</label><br>
-                            <input type="text" name="lastname" placeholder="last-name"> 
-                        </div>
-                         <div class="password_div">
-                              <label>Password</label><br>
-                              <input type="password" name="password" placeholder="password" required>
-                         </div>
-                         <div class="button_align">
-                             <input type="submit" value="Signup" class="btn">
-                         </div>
-                        
-                    </form>
-             </div>
-            <div class="login-div">
+            <div class="login_class">
+                <div class="login-div">
                
                     <form action="/user/login" method="POST" class="login_form">
                         <div class="email_div">
-                             <label>Have an account?</label><br>
+                             <label id="demo">Have an account?</label>
                              <input type="text" name="email" placeholder="email">
                         </div>
                         <div class="email_div">
-                             <label>Password</label><br>
+                             <label>Password</label>
                              <input type="password" name="password" placeholder="password" >
                         </div>
                         <div class="button_align">
@@ -55,10 +30,39 @@
                         
                     </form>
             
+                </div>
             </div>
+            
+            <div class="signup_class">
+                <div class="signup-div">
+                    <!-- <p>Sign up for free</p> -->
+                        <form action="/user/save" method="POST" class="signup_form">
+                            <div class="email_div">
+                                 <label id="email_label">Email</label><br>
+                                 <input type="email" name="email" placeholder="email" id="user_email">
+                            </div>
+                            <div class="firstname_div">
+                                 <label>First name</label><br>
+                                 <input type="text" name="firstname" placeholder="first-name">
+                            </div>
+                            <div class="lastname_div">
+                                <label>Lastname</label><br>
+                                <input type="text" name="lastname" placeholder="last-name"> 
+                            </div>
+                             <div class="password_div">
+                                  <label>Password</label><br>
+                                  <input type="password" name="password" placeholder="password" required>
+                             </div>
+                             <div class="button_align">
+                                 <input type="submit" value="Signup" class="btn" onclick="validateForm(event)" required>
+                             </div>
+                            
+                        </form>
+                 </div>
+            </div>
+            
 
-    </div>
     <!-- <h1>hello</h1> -->
-   
+    <!-- <script src="/scripts/validation.js"></script> -->
 </body>
 </html>
