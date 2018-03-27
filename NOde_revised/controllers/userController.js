@@ -1,17 +1,15 @@
 var mongoose = require('mongoose');
 var User = require('../models/user');
 var Boom = require('boom');
-// mongoose.set('debug',true);
 var bcrypt = require('bcrypt');
-var Joi = require('joi');
 var userController = {};
 var ObjectId = require('mongodb').ObjectID;
+var jwt = require('jsonwebtoken');
 
 userController.create = function(req,res){ 
     res.render('../views/users/create');
 };
 userController.save = function(req,res){
-    // var user = new User(req.body);
     User.find({email:req.body.email})
     .exec()
     .then(user=>{
@@ -99,32 +97,7 @@ userController.delete = function(req,res){
 }
 
 userController.login = function(req,res){
-    // User.find({email:req.body.email,password:req.body.password})
-    // .exec()
-    // .then(user=>{
-    //     // user = req.body;
-    //     if(user.length<1){
-    //         // console.log();
-    //         console.log("user does not exist..")
-    //     }
-    //     else{
-    //         // console.log(user);   
-    //         // res.redirect('/user/show/'+user_id);
-    //         user = user[0];
-    //         console.log('user exists..');
-    //         console.log(user);
-    //         if(user.email === 'admin@gmail.com' && user.password ==="admin"){
-    //             // res.status(200).json({message:"Welcome admin.."});
-    //             res.render('../views/admin/admin');
-    //         }
-    //         else{
-    //              res.render('../views/users/show',{user:user});
-    //         }
-            
-           
-            
-    //     }
-    // })
+    
 
     User.find({email:req.body.email})
     .exec()
@@ -137,10 +110,18 @@ userController.login = function(req,res){
                 console.log(err);
             }
             if(result){
+
+                var token = jwt.sign({
+                    email:user[0].email
+                },"secretkey",{
+
+                    expiresIn:"1h"
+                });
+                console.log(token);
                 if(req.body.email==='admin@gmail.com' && req.body.password ==='admin'){
                     // userController.list(req,res);
                     res.redirect('/user/login/admin/users');
-                    res.render('../views/admin/list');
+                    // res.render('../views/admin/list');
                 }
                 console.log(user);
                 user = user[0];
@@ -149,7 +130,7 @@ userController.login = function(req,res){
             // res.send(Boom.badRequest('Auth falied...'));
         })
     })
-}
+} 
 
 userController.list = function(req,res){
     User.find()
