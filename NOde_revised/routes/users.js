@@ -1,6 +1,6 @@
 var express = require('express');
-var validation = require('../validation/userValidation');
-
+var validation = require('../middleware/validation/userValidation');
+var checkAuth = require('../middleware/authentication/checkAuth');
 var router = express.Router();
 // var Validate = require('../validation/userValidation');
 var user = require('../controllers/userController');
@@ -51,7 +51,7 @@ router.get('/login/admin/users',(req,res)=>{
     user.list(req,res);
    
 })
-router.get('/login/admin/update/:id',(req,res)=>{
+router.post('/login/admin/update/:id',(req,res)=>{
     user.admin_update(req,res);
 })
 

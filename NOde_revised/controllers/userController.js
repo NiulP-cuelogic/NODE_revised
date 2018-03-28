@@ -5,6 +5,11 @@ var bcrypt = require('bcrypt');
 var userController = {};
 var ObjectId = require('mongodb').ObjectID;
 var jwt = require('jsonwebtoken');
+var cookie = require('cookie-parser');
+var Promise = require('bluebird');
+Promise.promisifyAll(bcrypt);
+Promise.promisifyAll(mongoose);
+
 
 userController.create = function(req,res){ 
     res.render('../views/users/create');
@@ -21,7 +26,7 @@ userController.save = function(req,res){
 
         }
 
-        bcrypt.hash(req.body.password,10,(err,hash)=>{
+        bcrypt.hashAsync(req.body.password,10,(err,hash)=>{
             if(err){
                 console.log("some error occurred..");
             }else{
@@ -35,8 +40,6 @@ userController.save = function(req,res){
                 user
                 .save()
                 .then(user=>{
-                    console.log(user);
-                    console.log(req.body);
                     res.redirect('/user/show/'+ user._id);
                 })
                 .catch(err=>{
@@ -60,17 +63,7 @@ userController.show = function(req,res){
     })  
 }
 
-// userController.edit = function(req,res){
-//     User.findOne({_id:req.params.id})
-//         .exec((err,user)=>{
-//             if(err){
-//                 console.log("Error while editing...");
-//             }else{
-//                 // res.render("../views/users/edit",{user:user});
-            
-//             }
-//     })
-// }
+
 
 userController.update = function(req,res){
     User.findByIdAndUpdate(req.params.id,{$set:{firstname:req.body.firstname,lastname:req.body.lastname}}
@@ -99,8 +92,8 @@ userController.delete = function(req,res){
 userController.login = function(req,res){
     
 
-    User.find({email:req.body.email})
-    .exec()
+    User.findAsync({email:req.body.email})
+    // .exec()
     .then(user=>{
         if(user.length<1){
             console.log('user does not exist..');
@@ -111,21 +104,24 @@ userController.login = function(req,res){
             }
             if(result){
 
-                var token = jwt.sign({
-                    email:user[0].email
-                },"secretkey",{
+                // var token = jwt.sign({
+                //     email:user[0].email
+                // },"secretkey",{
 
-                    expiresIn:"1h"
-                });
-                console.log(token);
+                //     expiresIn:"1h"
+                // });
+                // console.log(token);
                 if(req.body.email==='admin@gmail.com' && req.body.password ==='admin'){
-                    // userController.list(req,res);
+           
+
                     res.redirect('/user/login/admin/users');
-                    // res.render('../views/admin/list');
+                   
+                   
                 }
                 console.log(user);
                 user = user[0];
-                res.render('../views/users/show',{user:user});
+                res.render('../views/users/show');
+                // res.json({token:token});
             }
             // res.send(Boom.badRequest('Auth falied...'));
         })
@@ -177,7 +173,7 @@ userController.admin_edit = function(req,res){
             console.log("error ocurred..");
         }
         else{
-            // res.render('../views/admin/edit',{user:users});
+            res.render('../views/admin/edit',{user:users});
             res.redirect('/user/login/admin/users');
         }
     })
@@ -210,8 +206,8 @@ userController.search = function(req,res){
             var id = ObjectId(users[0]._id);
             console.log(id);
             user = users[0];
-            // console.log(user);
-            // user = users[0];
+            console.log(user);
+            user = users[0];
             res.render('../views/admin/edit',{user:user});
         }
     })

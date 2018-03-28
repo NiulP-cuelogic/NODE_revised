@@ -31,13 +31,11 @@
                         
                         <td id="delete-button_<%=i%>"> <a href="/user/login/admin/delete/<%=users[i]._id%>">Delete </td>
                         
-                        <form >
                         
-                         <td id="save-button_<%=i%>"> <button formaction="/user/login/admin/edit/<%=users[i]._id%>" >Edit</button></td>
-                        </form>
-                        <form>
-                                <td id="save-button_<%=i%>"> <button formaction="/user/login/admin/update/<%=users[i]._id%>" >Update</button></td>
-                        </form>
+                        
+                         <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit</td>
+        
+                    
                         
                         
                     </tr>
@@ -50,33 +48,7 @@
         <input type="text" placeholder="search by name" name="input_name">
         <input type="submit" value="SEARCH" id="search-btn">
         </form>
-        <!-- </div>
+        </div>
         
-        <!-- <button id="get-button">Get users</button> -->
-
-        <!-- <table>
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>First-name</th>
-                    <th>Last-name</th>
-                </tr>
-            </thead>
-            <tbody id="allusers">
-
-            </tbody>
-        </table> -->
-    <!-- </div> -->
-   <script>
-        function myFunction(){
-            console.log('called..');
-            console.log("row_<%=i%>");
-            var a = "<%=i%>";console.log(a);
-            var m=document.getElementById("row_"+a);
-            console.log(m);
-        }
-
-   </script>
-    
 </body>
 </html>
