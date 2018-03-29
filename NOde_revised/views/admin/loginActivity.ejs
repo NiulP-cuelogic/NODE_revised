@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <table class="users">
+           
+                <tr>
+                    <th>User-email</th>
+                    <th>User ID</th>
+                    <th>Date and time</th>
+                    <th>Date now </th>
+                </tr>
+            
+            <tbody>
+                <% for(var i=0; i<user.length;i++) { %>
+                    <tr id="row_<%=i%>"> 
+                    
+                        <td> <p> <%=user[i].user_email%></p></td>
+                        <td> <%=user[i].userId%></td>
+                        <td>  <%=user[i].date%></td>
+                        <td>  <%=user[i].loginDate%></td>
+                        
+                        
+                    </tr>
+                  <% } %>
+            </tbody>
+        </table>    
+</body>
+</html>

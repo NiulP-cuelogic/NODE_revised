@@ -1,8 +1,5 @@
 var mongoose = require('mongoose');
 mongoose.set('debug',true);
-var express = require('express');
-// var expressJoi = require('express-joi');
-var Joi = require('joi');
 
 var Schema = mongoose.Schema;
 

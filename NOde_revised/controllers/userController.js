@@ -7,6 +7,7 @@ var ObjectId = require('mongodb').ObjectID;
 var jwt = require('jsonwebtoken');
 var cookie = require('cookie-parser');
 var Promise = require('bluebird');
+var UserActivity = require('../models/userActivity');
 Promise.promisifyAll(bcrypt);
 Promise.promisifyAll(mongoose);
 
@@ -93,7 +94,6 @@ userController.login = function(req,res){
     
 
     User.findAsync({email:req.body.email})
-    // .exec()
     .then(user=>{
         if(user.length<1){
             console.log('user does not exist..');
@@ -103,16 +103,24 @@ userController.login = function(req,res){
                 console.log(err);
             }
             if(result){
+                console.log("login time",Date.now());
 
-                // var token = jwt.sign({
-                //     email:user[0].email
-                // },"secretkey",{
+                var user_date = Date.now();
 
-                //     expiresIn:"1h"
-                // });
-                // console.log(token);
+                var id = ObjectId(user[0]._id);
+                
+                var userActivity = new UserActivity({
+                    date:user_date,
+                    user_email:req.body.email,
+                    userId:id,
+                    loginDate:Date.now()
+
+                })
+               userActivity.save().then(user=>{console.log(user)});
+               
                 if(req.body.email==='admin@gmail.com' && req.body.password ==='admin'){
-           
+
+                    
 
                     res.redirect('/user/login/admin/users');
                    
@@ -120,10 +128,10 @@ userController.login = function(req,res){
                 }
                 console.log(user);
                 user = user[0];
-                res.render('../views/users/show');
-                // res.json({token:token});
+                res.render('../views/users/show',{user:user});
+               
             }
-            // res.send(Boom.badRequest('Auth falied...'));
+      
         })
     })
 } 
@@ -211,5 +219,20 @@ userController.search = function(req,res){
             res.render('../views/admin/edit',{user:user});
         }
     })
+}
+
+
+userController.login_activity = function(req,res){
+    UserActivity
+    .find()
+    .select("userId date user_email loginDate")
+    .exec()
+    .then(user=>{
+        console.log(user);  
+        // res.send(user);
+        res.render("../views/admin/loginActivity",{user:user});
+    })
+
+
 }
 module.exports = userController;

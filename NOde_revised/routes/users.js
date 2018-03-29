@@ -65,4 +65,8 @@ router.post('/login/admin/search',(req,res)=>{
     user.search(req,res);
 })
 
+router.get('/login/admin/showLoginActivity',(req,res)=>{
+    user.login_activity(req,res);
+})
+
 module.exports = router;
