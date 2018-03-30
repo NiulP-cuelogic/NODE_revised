@@ -8,7 +8,9 @@
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
-    <!-- <script src="/scripts/validation.js"></script> -->
+    <script src="jquery.js"></script>
+    <script src="/server_validation.js"></script>
+    <script src="../scripts/validation.js"></script>
 
 </head>
 
@@ -17,15 +19,15 @@
         <div class="login_div">
             <form action="/user/login" method="post">
                 <div class="email_div_login">
-                    <label>Email</label>
-                    <input type="email" placeholder="email" name="email">
+                    <label class="login_label">Email</label>
+                    <input type="email" placeholder="email" name="email" id="input_email">
                 </div>
                 <div class="password_div_login">
-                    <label>Password</label>
-                    <input type="password" placeholder="password" name="password">
+                    <label class="login_label">Password</label>
+                    <input type="password" placeholder="password" name="password" id="input_password">
                 </div>
                 <div class="button_div_login">
-                    <input type="submit" value="Login">
+                    <input type="submit" value="Login" id="login_btn">
                 </div>
             </form>
         </div>
@@ -36,19 +38,19 @@
                  <form action="/user/save" method="POST" class="signup_form">
                     <div class="email_div">
                          <label id="email_label">Email</label><br>
-                         <input type="email" name="email" placeholder="email" id="user_email">
+                         <input type="email" name="email" placeholder="email" id="user_email" onfocusout="email_validation()">
                     </div>
                     <div class="firstname_div">
-                         <label>First name</label><br>
-                         <input type="text" name="firstname" placeholder="first-name">
+                         <label id="firstname_label">First name</label><br>
+                         <input type="text" name="firstname" placeholder="first-name" id="user_firstname" onfocusout="firstname_validation()">
                     </div>
                     <div class="lastname_div">
-                        <label>Lastname</label><br>
-                        <input type="text" name="lastname" placeholder="last-name"> 
+                        <label id="lastname_label">Lastname</label><br>
+                        <input type="text" name="lastname" placeholder="last-name" id="user_lastname" onfocusout="lastname_validation()"> 
                     </div>
                      <div class="password_div">
-                          <label>Password</label><br>
-                          <input type="password" name="password" placeholder="password" required>
+                          <label id="password_label">Password</label><br>
+                          <input type="password" name="password" placeholder="password" required id="user_password">
                      </div>
                      <div class="button_align">
                          <input type="submit" value="Signup" class="btn" onclick="validateForm(event)" required>

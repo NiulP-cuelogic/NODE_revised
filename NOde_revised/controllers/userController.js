@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 var User = require('../models/user');
 var Boom = require('boom');
 var bcrypt = require('bcrypt');
+var moment = require('moment');
 var userController = {};
 var ObjectId = require('mongodb').ObjectID;
 var jwt = require('jsonwebtoken');
@@ -20,7 +21,9 @@ userController.save = function(req,res){
     .exec()
     .then(user=>{
         if(user.length>=1){
-            console.log('user exists...');
+            // console.log('user exists...');
+            // res.send(Boom.badRequest("Username or password is invalid...."));   
+            
             // window.alert("User already exists .. please login..");
         }
         else{
@@ -96,7 +99,8 @@ userController.login = function(req,res){
     User.findAsync({email:req.body.email})
     .then(user=>{
         if(user.length<1){
-            console.log('user does not exist..');
+            // console.log('user does not exist..');
+            
         }
         bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
             if(err){
@@ -132,6 +136,11 @@ userController.login = function(req,res){
                
             }
       
+        })
+    })
+    .catch(err=>{
+        res.json({
+            success:true , message:"Username or password is invalid."
         })
     })
 } 
@@ -225,12 +234,28 @@ userController.search = function(req,res){
 userController.login_activity = function(req,res){
     UserActivity
     .find()
-    .select("userId date user_email loginDate")
+    .select(" date user_email loginDate")
     .exec()
     .then(user=>{
-        console.log(user);  
-        // res.send(user);
-        res.render("../views/admin/loginActivity",{user:user});
+        
+        var diff=[];
+        var date_now = moment(new Date());
+        console.log(date_now);
+        var newUser = [];
+        // var lastLogin = moment(user[0].date);
+        var lastLogin = [];
+        // console.log(lastLogin);
+        // console.log("difference is ", date_now.diff(lastLogin,'days'),'days'); 
+        for(let i=0;i<user.length;i++){
+             lastLogin[i] = moment(user[i].date);
+            diff[i] = date_now.diff(lastLogin[i],'days'); 
+            if(diff[i] <= 5){
+                newUser[i] = user[i];
+                // res.render("../views/admin/loginActivity",{user:user});
+            }
+        } 
+        console.log(diff);
+        res.render("../views/admin/loginActivity",{user:newUser});
     })
 
 

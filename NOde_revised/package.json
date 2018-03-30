@@ -19,6 +19,7 @@
     "express-joi": "^0.3.1",
     "joi": "^13.1.2",
     "jsonwebtoken": "^8.2.0",
+    "moment": "^2.21.0",
     "mongodb": "^3.0.4",
     "mongoose": "^5.0.10",
     "morgan": "^1.9.0",
