@@ -2,6 +2,9 @@ var express = require('express');
 var validation = require('../middleware/validation/userValidation');
 var checkAuth = require('../middleware/authentication/checkAuth');
 var router = express.Router();
+var passport = require('passport');
+var User = require('../models/user');
+var LocalStrategy = require('passport-local').Strategy;
 // var Validate = require('../validation/userValidation');
 var user = require('../controllers/userController');
 
@@ -28,9 +31,14 @@ router.post('/delete/:id',(req,res)=>{
     user.delete(req,res);
 })
 
+
+
+
+
 router.post('/login',(req,res)=>{
     user.login(req,res);
 })
+   
 
 router.get('/admin/users',(req,res)=>{
     user.list(req,res);

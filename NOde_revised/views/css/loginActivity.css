@@ -1,5 +1,6 @@
 body{
     background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../css/images/mikayla-mallek-219946-unsplash.jpg);
+    background-size: cover;
 }
 .container{
     margin-top: 110px;
@@ -18,8 +19,10 @@ body{
     text-align:center; 
 }
 
-.users tr:nth-child(even){background-color: rgba(255,255,255,0.8);}
-.users tr:nth-child(odd){background-color:rgba(255,255,255,0.8);}
+.users tr{
+    background-color: rgba(255,255,255,0.8);
+}
+
 
 .users tr:hover {background-color: #ddd;}
 
@@ -63,12 +66,16 @@ a:hover{
     height: 30px;
 }
 
-,search input[type="submit"]:hover{
-    color: #5CAF51;
+.search input[type="submit"]:hover{
+    color: white;
 }
 
 .search a{
     text-decoration: none;
     color: white;
     /* padding-top: 20px; */
+}
+
+.search a:hover{
+    color: #4CAF50;
 }

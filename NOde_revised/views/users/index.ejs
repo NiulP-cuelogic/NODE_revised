@@ -11,6 +11,7 @@
     <!-- <script src="jquery.js"></script> -->
 </head>
 <body>
+    
     <div class="login-page">
         <div class="form">
             <form action="/user/save" class="register-form" method="post">
@@ -23,7 +24,10 @@
                 <input type="submit" value="Create" id="signup_btn" onsubmit="validateForm(event)">
                 <p class="message">Already a user?<a href="#">Login</a> </p>
                 <p id="error_message_signup"></p>
-            </form>     
+            </form>
+            <% if ( expressFlash.length > 0 ) { %>
+                <p>Message: <%= expressFlash %> </p>
+              <% } %>
             <form action="/user/login" class="login-form" method="post">
                 <input type="email" placeholder="email" name="email">
                 <input type="password" placeholder="password" name="password">
@@ -31,7 +35,7 @@
                 <!-- <button type="submit">Login</button> -->
                 <input type="submit" value="Login">
                 <p class="message">Not a user?<a href="#">Sign-up</a></p>
-                <p id="error_message_login"></p>
+                
             </form>
         </div>
     </div>

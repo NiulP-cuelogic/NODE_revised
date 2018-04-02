@@ -8,13 +8,16 @@ var ObjectId = require('mongodb').ObjectID;
 var jwt = require('jsonwebtoken');
 var cookie = require('cookie-parser');
 var Promise = require('bluebird');
+var flash = require('connect-flash');
+var passport = require('passport');
+var session = require('express-session');
 var UserActivity = require('../models/userActivity');
 Promise.promisifyAll(bcrypt);
 Promise.promisifyAll(mongoose);
 
 
 userController.create = function(req,res){ 
-    res.render('../views/users/index');
+    res.render('../views/users/index',{expressFlash:req.flash("success")});
 };
 
 userController.save = function(req,res){
@@ -22,10 +25,7 @@ userController.save = function(req,res){
     .exec()
     .then(user=>{
         if(user.length>=1){
-            // console.log('user exists...');
-            // res.send(Boom.badRequest("Username or password is invalid...."));   
-            
-            // window.alert("User already exists .. please login..");
+
         }
         else{
 
@@ -101,6 +101,9 @@ userController.login = function(req,res){
     .then(user=>{
         if(user.length<1){
             // console.log('user does not exist..');
+            // res.render('../views/users/index');
+            req.flash("success","username or password is invalid..");
+            res.redirect('/user');
             
         }
         bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
@@ -139,11 +142,11 @@ userController.login = function(req,res){
       
         })
     })
-    .catch(err=>{
-        res.json({
-            success:true , message:"Username or password is invalid."
-        })
-    })
+    // .catch(err=>{
+    //     res.json({
+    //         success:true , message:"Username or password is invalid."
+    //     })
+    // })
 } 
 
 userController.list = function(req,res){
@@ -220,13 +223,14 @@ userController.search = function(req,res){
             console.log(err);
         }
         else{
-            
-            var id = ObjectId(users[0]._id);
-            console.log(id);
-            user = users[0];
-            console.log(user);
-            user = users[0];
-            res.render('../views/admin/edit',{user:user});
+            var id = [];
+            var user = [];
+            for(var i=0;i<users.length;i++){
+                id[i] = ObjectId(users[i]._id);
+                console.log(id[i]);
+                user[i] = users[i];
+            }
+            res.render("../views/admin/user_search_list",{user:user});
         }
     })
 }
@@ -235,6 +239,7 @@ userController.search = function(req,res){
 userController.login_activity = function(req,res){
     UserActivity
     .find()
+    .sort({loginDate:'desc'})
     .select(" user_email loginDate")
     .exec()
     .then(user=>{
