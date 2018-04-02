@@ -14,8 +14,9 @@ Promise.promisifyAll(mongoose);
 
 
 userController.create = function(req,res){ 
-    res.render('../views/users/create');
+    res.render('../views/users/index');
 };
+
 userController.save = function(req,res){
     User.find({email:req.body.email})
     .exec()
@@ -114,10 +115,10 @@ userController.login = function(req,res){
                 var id = ObjectId(user[0]._id);
                 
                 var userActivity = new UserActivity({
-                    date:user_date,
+                    // date:user_date,
                     user_email:req.body.email,
                     userId:id,
-                    loginDate:Date.now()
+                    loginDate:user_date
 
                 })
                userActivity.save().then(user=>{console.log(user)});
@@ -234,7 +235,7 @@ userController.search = function(req,res){
 userController.login_activity = function(req,res){
     UserActivity
     .find()
-    .select(" date user_email loginDate")
+    .select(" user_email loginDate")
     .exec()
     .then(user=>{
         
@@ -245,10 +246,14 @@ userController.login_activity = function(req,res){
         // var lastLogin = moment(user[0].date);
         var lastLogin = [];
         // console.log(lastLogin);
-        // console.log("difference is ", date_now.diff(lastLogin,'days'),'days'); 
+        console.log("difference is ", date_now.diff(lastLogin,'days'),'days'); 
         for(let i=0;i<user.length;i++){
              lastLogin[i] = moment(user[i].date);
-            diff[i] = date_now.diff(lastLogin[i],'days'); 
+            diff[i] = date_now.diff(lastLogin[i],'days');
+            // console.log(user[i].user_email);
+            // var email = [];
+            // email[i] = user[i]   .user_email; 
+            // console.log(email[i]);
             if(diff[i] <= 5){
                 newUser[i] = user[i];
                 // res.render("../views/admin/loginActivity",{user:user});

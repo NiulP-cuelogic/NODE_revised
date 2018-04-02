@@ -7,50 +7,44 @@
     <title>Document</title>
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">    
-    <link rel="stylesheet" href="/css/admin_index.css">
+    <link rel="stylesheet" href="/css/loginActivity.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-    <div class="container">
-        <table class="users">
-           
+        <div class="container">
+            <table class="users">
                 <tr>
-                    <th>User-email</th>
-                    <th>First-name</th>
-                    <th>Last-name</th>
-                    <th>Actions</th>
+                    <th>User email</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Delete</th>
+                    <th>Edit</th>
                 </tr>
-            
-            <tbody>
-                <% for(var i=0; i<users.length;i++) { %>
-                    <tr id="row_<%=i%>"> 
-                    
-                        <td id="<%=i%>" contenteditable="true"> <p> <%=users[i].email%></p></td>
-                        <td class="firstname" contenteditable="true"> <%=users[i].firstname%></td>
-                        <td class="lastname" contenteditable="true">  <%=users[i].lastname%></td>
-                        
-                        <td id="delete-button_<%=i%>"> <a href="/user/login/admin/delete/<%=users[i]._id%>">Delete </td>
-                        
-                        
-                        
-                         <td id="edit-button_<%=i%>"> <a href="/user/login/admin/edit/<%=users[i]._id%>">Edit</td>
-        
-                    
-                        
-                        
-                    </tr>
-                  <% } %>
-            </tbody>
-        </table>    
-        <div class="search">
-            <form action="/user/login/admin/search" method="POST">
-        
-        <input type="text" placeholder="search by name" name="input_name">
-        <input type="submit" value="SEARCH" id="search-btn">
-        </form>
-
-        <a href="/user/login/admin/showLoginActivity">Get login activity</a>
+                <tbody>
+                    <%for(var i=0;i<users.length;i++){%>
+                        <tr>
+                            <td><%=users[i].email%></td>
+                            <td><%=users[i].firstname%></td>
+                            <td><%=users[i].lastname%></td>
+                            <td><a href="/user/login/admin/delete/<%=users[i]._id%>">Delete</a></td>
+                            <td><a href="/user/login/admin/edit/<%=users[i]._id%>">Edit</a></td>
+                        </tr>
+                        <%}%>   
+                </tbody>
+            </table>
         </div>
-        
+         <div class="search">
+                <form action="/user/login/admin/search" method="POST">
+            
+                    <input type="text" placeholder="search by name" name="input_name">
+                    <input type="submit" value="SEARCH" id="search-btn">
+                </form>
+                <div class="login_activity">
+                        <a href="/user/login/admin/showLoginActivity">Get login activity</a>
+         </div>
+    
+            
+        </div>
+   
 </body>
 </html>

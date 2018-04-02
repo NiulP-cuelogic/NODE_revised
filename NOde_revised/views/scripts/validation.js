@@ -5,9 +5,12 @@ function validateForm(event){
     event.preventDefault();
     if(email_validation() && firstname_validation() && lastname_validation()){
         // console.log('called..');
+        // window.location = "show.ejs";
+        // res.render('/user/show')
         return true;
     }
     else{
+        document.getElementById("error_message_signup").innerHTML = "One or more fields is/are invalid or not filled out";
         return false;
     }
 }
@@ -23,6 +26,8 @@ function email_validation(){
     }
     else{
         document.getElementById('user_email').style.border = "1px solid red";
+        document.getElementById("error_message_signup").innerHTML = "Invalid email";
+        document.getElementById("error_message_signup").style.color = "#FF4136";
         return false;
     }
    

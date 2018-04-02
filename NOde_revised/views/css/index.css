@@ -1,46 +1,65 @@
-*{
-    /* box-sizing: border-box; */
-    font-family: 'Lato', sans-serif;
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../css/images/mikayla-mallek-219946-unsplash.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    font-family:  'Lato', sans-serif;
 }
-header{
+.login-page{
+    width: 360px;
+    padding: 10% 0 0;
+    margin: auto;
+}
+
+.form{
+    position: relative;
+    z-index:1;
+    background-color: #ffffff;
+    max-width:360px;
+    background: rgba(255,255,255,0.2);
+    margin: 0 auto 100px;
+    padding: 45px;
+    text-align: center; 
+}
+.form input{
+    font-family:  'Lato', sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width:100%;
+    border:0;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size:14px; 
+}
+
+.form input[type="submit"]{
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
     width: 100%;
-    height: 70px;
-     background: #c5d5cb; 
-    /* background-color: rgba(0,0,0,0.5); */
-}
-body {
-    margin: 0 auto;
-    font-family:'Rammetto One', cursive;
-    font-family: 'Lato', sans-serif;
-    
-       
-}
-.login_label{
-    color: grey;
-}
-.login_div{
-    float: right;
-    padding-top: 20px;
-    margin: 0 auto;
-    width: 40%;
-}
-.email_div_login, .password_div_login,.button_div_login{
-    display: inline-block;
-}
-.signup_class{
-    margin: 0 auto;
-    width: 50%; 
-    /* background-color: #9fa8a3; */
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    cursor:pointer;
 }
 
-.signup-div{
-    margin: 0 auto;
-    width: 30%;
-    padding: 80px;
-    padding-top: 28px;
-    background-color: #f2f2f2;
+.form input[type="submit"]:hover,.form input[type="submit"]:active{
+    background:#43A057;
+
 }
 
-.email_div,.firstname_div,.lastname_div,.password_div{
-    margin: 20px;
+.form .message{
+    margin: 15px 0 0;
+    color:aliceblue;
+    font-size: 16px;
+}
+
+.form a{
+    color:blue;
+    text-decoration: none;
+}
+.form .login-form{
+    display: none;
 }

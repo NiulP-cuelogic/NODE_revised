@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and registration</title>
+    <link rel="stylesheet" href="../css/index.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script src="../scripts/validation.js"></script>
+    <!-- <script src="jquery.js"></script> -->
+</head>
+<body>
+    <div class="login-page">
+        <div class="form">
+            <form action="/user/save" class="register-form" method="post">
+                <input type="email" placeholder="email" name="email" onfocusout="email_validation()" id="user_email">
+                <input type="text" placeholder="first name" name="firstname" onfocusout="firstname_validation()" id="user_firstname">
+                <input type="text" placeholder="last name" name="lastname" onfocusout="lastname_validation()" id="user_lastname">
+                <input type="password" placeholder="password" name="password" onfocusout="password_validation()" id="user_password">
+                <!-- <input type="submit" value="Create"> -->
+              
+                <input type="submit" value="Create" id="signup_btn" onsubmit="validateForm(event)">
+                <p class="message">Already a user?<a href="#">Login</a> </p>
+                <p id="error_message_signup"></p>
+            </form>     
+            <form action="/user/login" class="login-form" method="post">
+                <input type="email" placeholder="email" name="email">
+                <input type="password" placeholder="password" name="password">
+                <!-- <input type="submit" value="Login"> -->
+                <!-- <button type="submit">Login</button> -->
+                <input type="submit" value="Login">
+                <p class="message">Not a user?<a href="#">Sign-up</a></p>
+                <p id="error_message_login"></p>
+            </form>
+        </div>
+    </div>
+    <script src="jquery.js"></script>
+    <script>
+        $('.message a').click(function(){
+            $('form').animate({height:"toggle",opacity:"toggle"},"slow");
+        }); 
+    </script>
+    
+   
+</body>
+</html>

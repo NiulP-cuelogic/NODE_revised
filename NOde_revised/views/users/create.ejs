@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,23 +38,24 @@
                  <form action="/user/save" method="POST" class="signup_form">
                     <div class="email_div">
                          <label id="email_label">Email</label><br>
-                         <input type="email" name="email" placeholder="email" id="user_email" onfocusout="email_validation()">
+                         <input type="email" name="email" placeholder="email" id="user_email">
                     </div>
                     <div class="firstname_div">
                          <label id="firstname_label">First name</label><br>
-                         <input type="text" name="firstname" placeholder="first-name" id="user_firstname" onfocusout="firstname_validation()">
+                         <input type="text" name="firstname" placeholder="first-name" id="user_firstname">
                     </div>
                     <div class="lastname_div">
                         <label id="lastname_label">Lastname</label><br>
-                        <input type="text" name="lastname" placeholder="last-name" id="user_lastname" onfocusout="lastname_validation()"> 
+                        <input type="text" name="lastname" placeholder="last-name" id="user_lastname"> 
                     </div>
                      <div class="password_div">
                           <label id="password_label">Password</label><br>
                           <input type="password" name="password" placeholder="password" required id="user_password">
                      </div>
                      <div class="button_align">
-                         <input type="submit" value="Signup" class="btn" onclick="validateForm(event)" required>
+                         <input type="submit" value="Signup" class="btn">
                      </div>
+                     
                     
                 </form>
          </div>

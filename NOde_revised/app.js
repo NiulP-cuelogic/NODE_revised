@@ -16,6 +16,7 @@ var userRoutes = require("./routes/users");
 // app.set('views',path.join(_dirname,'views'));
 app.use(express.static(__dirname+'/views'));
 app.use(express.static(__dirname+'/views/scripts'));
+// app.use(express.static(__dirname+'/views/css'))
 app.set("view engine",'ejs');
 
 

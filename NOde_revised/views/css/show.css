@@ -1,0 +1,40 @@
+body{
+    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../css/images/mikayla-mallek-219946-unsplash.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center;
+    /* font-family:  'Lato', sans-serif; */
+}
+
+.container{
+    width: 360px;
+    padding: 10% 0 0;
+    margin: auto;
+}
+
+form{
+    position: relative;
+    z-index:1;
+    /* background-color: #ffffff;/ */
+    max-width:360px;
+    /* background: rgba(255,255,255,0.2); */
+    margin: 0 auto 25px;
+    padding: 45px;
+    text-align: center;
+}
+form input{
+    font-family:  'Lato', sans-serif;
+    outline: 1;
+    background: #f2f2f2;
+    width:100%;
+    border:none;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size:14px; 
+}
+
+#edit{
+    width: 270px;
+    height: 47px;
+}
