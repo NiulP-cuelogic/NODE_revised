@@ -7,7 +7,8 @@ var Joi = require('joi');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
 var passport = require('passport');
-var session = require('express-session');
+// var session = require('express-session');
+var session = require("client-sessions");
 
 
 
@@ -15,9 +16,10 @@ app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
 app.use(session({
-    secret:"secret",
-    saveUninitialized:true,
-    resave:true
+    cookieName: 'session',
+    secret: 'secret',
+    duration: 30 * 60 * 1000,
+    activeDuration: 5 * 60 * 1000
 }));
 
 app.use(passport.initialize());
