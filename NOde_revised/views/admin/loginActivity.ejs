@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/loginActivity.css">
     <title>Document</title>
+    
 </head>
 <body>
 
@@ -22,10 +23,10 @@
             <tbody>
                 <% for(var i=0; i<user.length;i++) { %>
                     <tr id="row_<%=i%>"> 
-                    
-                        <td> <p> <%=user[i].user_email%></p></td>
+                        <td>  <%=user[i].user_email%></td>
                         <td>  <%=user[i].loginDate%></td>
                         
+
                         
                     </tr>
                   <% } %>

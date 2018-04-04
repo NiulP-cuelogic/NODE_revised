@@ -1,19 +1,21 @@
-// import { O_APPEND } from 'constants';
 
-var mongoose = require('mongoose');
-var User = require('../models/user');
-var Boom = require('boom');
-var bcrypt = require('bcrypt');
-var moment = require('moment');
+
+// import { O_APPEND } from "constants";
+var path = require('path');
+var mongoose = require("mongoose");
+var User = require("../models/user");
+var Boom = require("boom");
+var bcrypt = require("bcrypt");
+var moment = require("moment");
 var userController = {};
-var ObjectId = require('mongodb').ObjectID;
-var jwt = require('jsonwebtoken');
-var cookie = require('cookie-parser');
-var Promise = require('bluebird');
-var flash = require('connect-flash');
-var passport = require('passport');
-var session = require('express-session');
-var UserActivity = require('../models/userActivity');
+var ObjectId = require("mongodb").ObjectID;
+var jwt = require("jsonwebtoken");
+var cookie = require("cookie-parser");
+var Promise = require("bluebird");
+var flash = require("connect-flash");
+var passport = require("passport");
+var session = require("express-session");
+var UserActivity = require("../models/userActivity");
 
 mongoose.Promise = Promise;
 Promise.promisifyAll(bcrypt);
@@ -21,7 +23,7 @@ Promise.promisifyAll(mongoose);
 
 
 userController.create = function(req,res){ 
-    res.render('../views/users/index');
+    res.render("../views/users/index");
 };
 
 userController.save = function(req,res){
@@ -43,7 +45,7 @@ userController.save = function(req,res){
                 user
                 .save()
                 .then(user=>{
-                    res.redirect('/user/show/'+ user._id);
+                    res.redirect("/user/show/"+ user._id);
                 })
                 .catch(err=>{
                     console.log(err);
@@ -76,26 +78,41 @@ userController.update = function(req,res){
     ,{new:true})
     .exec()
     .then(user=>{
-        res.render('../views/users/show',{user:user});
+        res.render("../views/users/show",{user:user});
     })
     .catch(err=>{
         res.send(Boom.badRequest("Invalid id.."));
     })
 }
 
+
+
+
+
+function promiseBcrypt (password,dbpassword) {
+    // console.log("password====>",password);
+    return new Promise(function(resolve,reject) {
+        var result = bcrypt.compareSync(password,dbpassword);
+        // console.log("result===>",result);
+        if(result) 
+        resolve(result);
+        else
+        reject(result);
+    })
+    
+}
 userController.login = function(req,res){
     
-
-    User.findAsync({email:req.body.email})
-    .then(user=>{
-        bcrypt.compare(req.body.password,user[0].password,(err,result)=>{
-            if(err){
-                console.log(err);
-            }
+    var user;
+    User.find({email:req.body.email})
+    .then(user1=>{
+        user = user1;
+        return promiseBcrypt(req.body.password,user[0].password);
+    }).then((result) => {
             if(result){
                 console.log("login time",Date.now());
 
-                var user_date = Date.now();
+                var user_date = moment();
 
                 var id = ObjectId(user[0]._id);
                 
@@ -108,36 +125,26 @@ userController.login = function(req,res){
                 })
                userActivity.save().then(user=>{console.log(user)});
                
-                if(req.body.email==='admin@gmail.com' && req.body.password ==='admin'){
-
-                    
-
-                    res.redirect('/user/login/admin/users');
-                   
-                   
-                }
+                if(req.body.email==="admin@gmail.com" && req.body.password ==="admin"){
+                    res.redirect("/user/login/admin/users");
+                }   
                 console.log(user);
                 user = user[0];
-                res.render('../views/users/show',{user:user});
-               
+                res.render("../views/users/show",{user:user});
             }
-      
         })
-    })
-    .catch(err=>{
-        res.json({
-            success:true , message:"Username or password is invalid."
+        .catch(err=>{
+            res.send(Boom.badRequest("User not found..."));
         })
-    })
-} 
+}              
 
 userController.list = function(req,res){
     User.find()
-    .select('email firstname lastname')
+    .select("email firstname lastname")
     .exec()
     .then(users=>{
         console.log(users);
-        res.render('../views/admin/list',{users:users});
+        res.render("../views/admin/list",{users:users});
     })
     .catch(err=>{
         console.log(err);
@@ -173,7 +180,7 @@ userController.admin_update = function(req,res){
         ,{new:true})
         .exec()
         .then(user=>{
-            res.redirect('/user/login/admin/users');
+            res.redirect("/user/login/admin/users");
         })
         .catch(err=>{
             res.send(Boom.badRequest("Id not found..."));
@@ -201,30 +208,30 @@ userController.search = function(req,res){
 userController.login_activity = function(req,res){
     UserActivity
     .find()
-    .sort({loginDate:'desc'})
+    .sort({loginDate:"desc"})
     .select(" user_email loginDate")
     .exec()
     .then(user=>{
         
         var diff=[];
         var date_now = moment(new Date());
-        console.log(date_now);
-        var newUser = [];
-        // var lastLogin = moment(user[0].date);
+        var users = [];
         var lastLogin = [];
-        // console.log(lastLogin);
-        console.log("difference is ", date_now.diff(lastLogin,'days'),'days'); 
-        for(let i=0;i<user.length;i++){
-             lastLogin[i] = moment(user[i].date);
-            diff[i] = date_now.diff(lastLogin[i],'days');
+       
+        for(var i=0;i<user.length;i++){
+             lastLogin[i] = moment(user[i].loginDate);
            
-            if(diff[i] <= 5){
-                newUser[i] = user[i];
-                // res.render("../views/admin/loginActivity",{user:user});
+            diff[i] = date_now.diff(lastLogin[i],"hours");
+            
+            if(diff[i] <=10){
+
+                users.push(user[i]);
+                console.log(diff[i]);   
+                
             }
         } 
-        console.log(diff);
-        res.render("../views/admin/loginActivity",{user:newUser});
+       
+        res.render("../views/admin/loginActivity",{user:users});
     })
     .catch(err=>{
         res.send(Boom.badRequest("Error"));
@@ -232,53 +239,8 @@ userController.login_activity = function(req,res){
 
 
 }
-// 
-// }userController.login = function(req,res){
-//     input_email = req.body.email;
-//     input_password = req.body.password;
-//     User.find({email:input_email})
-//      .exec()
-//      .then((user)=>{
-//          if(user.length<1){
-//              console.log("No user found..");
-//              res.send(Boom.badRequest("User not found..."));
-//          }
-//          else{
-//              bcrypt.compare(input_password,user[0].password,function(err,result){
-//                  if(err) throw err;
-//                  if(user[0].password!=input_password){
-//                      res.send(Boom.badRequest("Invalid password.."));
-//                  }
-//                  if(input_email==="admin@gmail.com" && input_password==="admin"){
-//                      res.render("../views/admin/list",{user:user});
-//                  }
-//                 //  else{
-//                 //      if(input_email==="admin@gmail.com" && input_password==="admin"){
-//                 //          res.redirect('/user/login/admin/users');
-//                 //      }
-//                 //      else{
-//                 //          user = user[0];
-//                 //          res.render("../views/users/show",{user:user});
-//                 //      }
-//                 //  }
-//                  console.log(user);
-//              })
-//          }
-//          return user;
-//          }).then((user)=>{
-//          var user_date = Date.now();
-//          var id = ObjectId(user[0]._id);
-//          var userActivity = new UserActivity({
-//                 user_email:input_email,
-//                 userId:id,
-//                 loginDate:user_date
-//          })
-//          userActivity.save().then(user=>{console.log(user)}).catch(err=>{console.log("error occured...")});
-//      })
-//      .catch((err)=>{
-//          console.log("err occured..");
-//      })
-    
-// }
+
+
+
 
 module.exports = userController;

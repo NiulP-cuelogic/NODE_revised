@@ -1,5 +1,7 @@
 var express = require('express');
 var app = express();
+var dotenv = require('dotenv').config();
+// dotenv.load();
 var flash = require('connect-flash');
 var mongoose = require('mongoose');
 var db = 'mongodb://localhost/user_db';
@@ -35,7 +37,7 @@ app.use(function(req,res,next){
 })
 
 // app.use(flash());
-mongoose.connect(db);
+mongoose.connect(process.env.DB);
 mongoose.Promise = global.Promise;
 var path  = require('path');
 var userRoutes = require("./routes/users");
