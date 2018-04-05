@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,28 +8,38 @@
     <link rel="stylesheet" href="/css/loginActivity.css">
     <title>Document</title>
 </head>
+
 <body>
     <div class="container">
         <table class="users">
-           
-                <tr>
-                    <th>User-email</th>
-                    <th>First name </th>
-                    <th>Last name </th>
-                </tr>
-            
+
+            <tr>
+                <th>User-email</th>
+                <th>First name </th>
+                <th>Last name </th>
+            </tr>
+
             <tbody>
                 <% for(var i=0; i<user.length;i++) { %>
-                    <tr id="row_<%=i%>"> 
-                    
-                        <td> <p> <%=user[i].email%></p></td>
-                        <td>  <%=user[i].firstname%></td>
-                        <td>  <%=user[i].lastname%></td>
-                        
+                    <tr id="row_<%=i%>">
+
+                        <td>
+                            <p>
+                                <%=user[i].email%>
+                            </p>
+                        </td>
+                        <td>
+                            <%=user[i].firstname%>
+                        </td>
+                        <td>
+                            <%=user[i].lastname%>
+                        </td>
+
                     </tr>
-                  <% } %>
+                    <% } %>
             </tbody>
         </table>
-    </div>    
+    </div>
 </body>
+
 </html>

@@ -1,37 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=\, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="/css/loginActivity.css">
     <title>Document</title>
-    
+
 </head>
+
 <body>
 
-    
+
     <div class="container">
         <table class="users">
-           
-                <tr>
-                    <th>User-email</th>
-                    <th>Recent logins </th>
-                   
-                </tr>
-            
+
+            <tr>
+                <th>User-email</th>
+                <th>Recent logins </th>
+
+            </tr>
+
             <tbody>
                 <% for(var i=0; i<user.length;i++) { %>
-                    <tr id="row_<%=i%>"> 
-                        <td>  <%=user[i].user_email%></td>
-                        <td>  <%=user[i].loginDate%></td>
-                        
+                    <tr id="row_<%=i%>">
+                        <td>
+                            <%=user[i].user_email%>
+                        </td>
+                        <td>
+                            <%=user[i].loginDate%>
+                        </td>
 
-                        
+
+
                     </tr>
-                  <% } %>
+                    <% } %>
             </tbody>
         </table>
-    </div>    
+    </div>
 </body>
+
 </html>

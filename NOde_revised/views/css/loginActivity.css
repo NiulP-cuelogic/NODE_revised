@@ -1,33 +1,35 @@
-body{
-    background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url(../css/images/mikayla-mallek-219946-unsplash.jpg);
+body {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(../css/images/mikayla-mallek-219946-unsplash.jpg);
     background-size: cover;
 }
-.container{
+
+.container {
     margin-top: 110px;
 }
-.users{
- border-collapse: collapse;
- width: 80%;
- margin: 0 auto;
-  
+
+.users {
+    border-collapse: collapse;
+    width: 80%;
+    margin: 0 auto;
 }
 
-.users td , .users th{
+.users td,
+.users th {
     /* width: 100%; */
     border: 1p solid #ddd;
     padding: 8px;
-    text-align:center; 
+    text-align: center;
 }
 
-.users tr{
-    background-color: rgba(255,255,255,0.8);
+.users tr {
+    background-color: rgba(255, 255, 255, 0.8);
 }
 
+.users tr:hover {
+    background-color: #ddd;
+}
 
-.users tr:hover {background-color: #ddd;}
-
-
-.users th{
+.users th {
     padding-top: 12px;
     /* padding-bottom: 12px; */
     /* text-align: left; */
@@ -35,30 +37,32 @@ body{
     color: white;
 }
 
-a{
+a {
     text-decoration: none;
     /* font-size: 12px; */
     color: black;
 }
-a:hover{
+
+a:hover {
     color: #4CAF50;
 }
 
-.search{
-    margin:0 auto;
+.search {
+    margin: 0 auto;
     margin-top: 100px;
     width: 70%;
     text-align: center;
 }
 
-.login_activity{
+.login_activity {
     margin-top: 30px;
 }
 
-.search input[type="text"]{
+.search input[type="text"] {
     height: 25px;
 }
-.search input[type='submit']{
+
+.search input[type='submit'] {
     background-color: #4CAF50;
     border-style: none;
     border-radius: 20px;
@@ -66,17 +70,17 @@ a:hover{
     height: 30px;
 }
 
-.search input[type="submit"]:hover{
+.search input[type="submit"]:hover {
     color: white;
 }
 
-.search a{
+.search a {
     text-decoration: none;
     color: white;
     /* padding-top: 20px; */
 }
 
-.search a:hover{
+.search a:hover {
     color: #4CAF50;
     /* background-color: #4caf61; */
 }

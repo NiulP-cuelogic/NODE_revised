@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,6 +9,7 @@
     <title>User Profile</title>
     <link rel="stylesheet" href="/css/show.css" type="text/css">
 </head>
+
 <body>
     <div class="container">
         <div class="heading">
@@ -17,42 +19,38 @@
         <form action="/user/update/<%=user._id%>" method="post" class="edit-form">
             <div>
                 <!-- <p contenteditable="false">HEY</p> -->
-                <input type="text" name="firstname" value="<%=user.firstname%>" id="user_firstname"  >
+                <input type="text" name="firstname" value="<%=user.firstname%>" id="user_firstname">
             </div>
             <div>
-               
-                <input type="text" name="lastname" value="<%=user.lastname%>" id="user_lastname" >
+
+                <input type="text" name="lastname" value="<%=user.lastname%>" id="user_lastname">
             </div>
             <input type="submit" value="Update">
-            
-           
+
+
         </form>
 
         <div class="edit-btn">
-                <button id="edit" onclick="editData()">Edit</button>
+            <button id="edit" onclick="editData()">Edit</button>
         </div>
 
-       
-        
+
+
     </div>
-  <script>
+    <script>
+        function editData() {
+            console.log('called');
+            document.getElementById("user_firstname").readOnly = false;
+            document.getElementById("user_lastname").readOnly = false;
+        }
+
+        document.getElementById('user_firstname').readOnly = true;
+        document.getElementById('user_lastname').readOnly = true;
+    </script>
 
 
-function editData(){
-    console.log('called');
-    document.getElementById("user_firstname").readOnly = false;
-    document.getElementById("user_lastname").readOnly = false;
-}
-  
-  document.getElementById('user_firstname').readOnly = true;
-  document.getElementById('user_lastname').readOnly = true;
-  
-
-
-  </script>
-       
-   
 
 
 </body>
+
 </html>
