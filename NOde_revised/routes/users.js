@@ -12,11 +12,7 @@ router.get('/', (req, res) => {
 
 router.post('/save', validation.validate, user.save);
 
-
-
-router.get('/show/:id', validation.checkObjectId, (req, res) => {
-    user.show(req, res);
-})
+router.get('/show/:id', validation.checkObjectId, user.show);
 
 router.get('/edit/:id', validation.checkObjectId, (req, res) => {
     user.edit(req, res);
@@ -25,6 +21,7 @@ router.get('/edit/:id', validation.checkObjectId, (req, res) => {
 router.post('/update/:id', validation.checkObjectId, (req, res) => {
     user.update(req, res);
 })
+
 router.post('/delete/:id', validation.checkObjectId, (req, res) => {
     user.delete(req, res);
 })

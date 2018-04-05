@@ -6,7 +6,6 @@ var userActivitySchema = new Schema({
 
     user_email: {
         type: String,
-        ref: "User"
     },
     userId: {
         type: mongoose.Schema.Types.ObjectId,
